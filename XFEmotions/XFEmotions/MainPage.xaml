@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XFEmotions"
+             x:Class="XFEmotions.MainPage">
+
+    <Grid>
+
+        <local:CameraPreviewView x:Name="CameraPreview"/>
+        <Image x:Name="ImageSnapshot" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+        <Frame OutlineColor="Transparent" Opacity="0.5"
+               HasShadow="False" BackgroundColor="Transparent"
+               HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+               x:Name="EmotionFrame"/>
+
+        <Label HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" 
+               VerticalOptions="Start" FontSize="30"
+               BackgroundColor="#55ffffff" x:Name="EmotionLabel"/>
+    </Grid>
+
+</ContentPage>
