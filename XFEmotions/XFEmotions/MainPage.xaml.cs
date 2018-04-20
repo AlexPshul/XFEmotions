@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.ProjectOxford.Common.Contract;
-using Microsoft.ProjectOxford.Emotion;
+using Microsoft.ProjectOxford.Face;
+using Microsoft.ProjectOxford.Face.Contract;
 using Xamarin.Forms;
 
 namespace XFEmotions
 {
 	public partial class MainPage : ContentPage
 	{
-        private readonly EmotionServiceClient _client = new EmotionServiceClient("Your Key Goes Here!");
+        private readonly FaceServiceClient _client = new FaceServiceClient("Your key goes here!", "Your regional base url goes here!");
 
 		public MainPage()
 		{
@@ -26,11 +23,11 @@ namespace XFEmotions
 
 	        while (true)
 	        {
-	            Emotion[] emotions = await _client.RecognizeAsync(CameraPreview.ImageBytes);
-	            if (emotions.Length == 0)
+	            Face[] faces = await _client.DetectAsync(CameraPreview.ImageBytes, false, false, new[] { FaceAttributeType.Emotion });
+	            if (faces.Length == 0)
 	                continue;
 
-	            string currentEmotion = emotions[0].Scores.ToRankedList().FirstOrDefault().Key;
+	            string currentEmotion = faces[0].FaceAttributes.Emotion.ToRankedList().FirstOrDefault().Key;
 	            EmotionLabel.Text = currentEmotion;
 	            EmotionFrame.BackgroundColor = GetEmotionColor(currentEmotion);
 	        }
